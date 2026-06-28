@@ -387,7 +387,7 @@ function _obsShowInput(i){
   if(box){box.style.display='block';box.scrollIntoView({behavior:'smooth',block:'end'});}
 }
 
-async async function _sendObsReply(i,isLast,quickReply){
+async function _sendObsReply(i,isLast,quickReply){
   const input=$('#obsInput'+i);
   const val=quickReply||(input?input.value.trim():'');
   if(!val&&!quickReply)return; // 沒有輸入就不處理
@@ -702,7 +702,7 @@ function nextDay(){if(state.world.day===3){observation();return}if(state.world.d
     state.characters.shen.heardAboutPlayer=rippleFacts;
   }
   state.world.day++;state.world.time=840;save();news()}}
-async async function observation(){if(state.logs.weeklyReport){renderObservation(state.logs.weeklyReport);return}screen(`<div class="letter-screen"><div class="letter-top"><div class="eyebrow" style="color:#c7b5db">DAY 1–3</div><h1 class="serif">第一頁：你讓世界看見的樣子</h1><p>正在整理這三天的觀測…</p></div></div>`,'observation');const data=await generateObservationReport();state.logs.weeklyReport=data;save();renderObservation(data)}
+async function observation(){if(state.logs.weeklyReport){renderObservation(state.logs.weeklyReport);return}screen(`<div class="letter-screen"><div class="letter-top"><div class="eyebrow" style="color:#c7b5db">DAY 1–3</div><h1 class="serif">第一頁：你讓世界看見的樣子</h1><p>正在整理這三天的觀測…</p></div></div>`,'observation');const data=await generateObservationReport();state.logs.weeklyReport=data;save();renderObservation(data)}
 async function submitMbtiAndReveal(){
   const input=$('#mbtiInput');
   const val=input?input.value.trim():'';
@@ -721,8 +721,7 @@ async function submitMbtiAndReveal(){
   }
   worldReveal();
 }
-async function submitMbtiAndReveal(){const val=$('#mbtiInput')?$('#mbtiInput').value.trim():'';if(val){if(!state.ending)state.ending={};state.ending.mbtiInput=val;save();const r=$('#mbtiReply');if(r){r.style.display='block';r.textContent='記下了。你說你是'+val+'，這三天的行為傾向是'+((state.ending&&state.ending.mbti)||'——')+'。兩件事可以都是真的。'}await new Promise(r=>setTimeout(r,1500))}worldReveal()}function respondObs(v,i){state.logs.observationReplies[i]=v;save();} function showReply(i){$('#reply'+i).classList.add('show')}
-function endingData(){return state.ending||fallbackEndingData()}
+
 async function ending(){if(state.ending&&state.ending.snap){renderEnding(state.ending);return}screen(`<div class="ending"><div class="ending-head"><div class="eyebrow">D1–3 試玩章回信</div><h1 class="serif">你帶得走的，不是一張成績單</h1><p class="desc">正在寫這封回信…</p></div></div>`,'ending');const d=await generateEndingData();state.ending=d;save();renderEnding(d)}
 function worldReveal(){
   // 先顯示loading
