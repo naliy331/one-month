@@ -683,7 +683,7 @@ if(_feedEl){
   _feedEl.scrollTop=_feedEl.scrollHeight;
 }
 // 清空輸入框
-['thought','action','speech'].forEach(id=>{const el=$('#'+id);if(el)el.value=''});
+['thought','action','speech'].forEach(id=>{const el=$('#'+id);if(el)el.value=''});}
 function confirmSkipScene(){
   if(confirm('今天不進入正式場景，直接進入日結？')){
     state.logs.days[state.world.day].whoLeft='未進入';
